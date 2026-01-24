@@ -60,8 +60,9 @@ async def operate_chat():
                 salt = os.urandom(16)
                 key = hash.pbkdf2_hmac("sha256", code.encode("utf-8"), salt, 100000, 32)
                 
-                pwd = f"{key}{salt}"
-                user_add(name.encode("utf-8"), pwd.encode("utf-8"))
+                pwd = key.hex()
+                salt = salt.hex()
+                user_add(name.encode("utf-8"), pwd.encode("utf-8"), salt.encode("utf-8"))
 
                 destory_mysql()
                 #await send_msg()
@@ -69,6 +70,7 @@ async def operate_chat():
                 # 登录账户，登录成功更换提示符
                 print(code)
             case "quit":
-                await sio.disconnect()
+                #await sio.disconnect()
+                pass
             case _:
                 print(code)

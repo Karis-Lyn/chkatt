@@ -22,13 +22,13 @@ bool check_acount() {
 }
 
 
-Client* user_add(char* nam, char* pwd) {
+Client* user_add(char* nam, char* pwd_key, char* salt) {
 	Client* client = (Client*) malloc(sizeof(Client));
-	MYSQL_BIND bind[2];
+	MYSQL_BIND bind[3];
 	MYSQL_STMT* stmt_obj;
 	const char* stmt_errors;
-	const char* addtion = "insert into usr_info(usr_name, pwd_hash, last_seen, created_at) "
-		"values (?, ?, now(), now())";
+	const char* addtion = "insert into usr_info(usr_name, pwd_hash, salt, last_seen, created_at) "
+		"values (?, ?, ?, now(), now())";
 
 
 	stmt_obj = mysql_stmt_init(g_db_handle);
@@ -39,9 +39,13 @@ Client* user_add(char* nam, char* pwd) {
 	bind[0].buffer_type = MYSQL_TYPE_STRING;
 	bind[0].buffer_length = strlen(nam);
 
-	bind[1].buffer = pwd;
+	bind[1].buffer = pwd_key;
 	bind[1].buffer_type = MYSQL_TYPE_STRING;
-	bind[1].buffer_length = strlen(pwd);
+	bind[1].buffer_length = strlen(pwd_key);
+
+	bind[2].buffer = salt;
+	bind[2].buffer_type = MYSQL_TYPE_STRING;
+	bind[2].buffer_length = strlen(salt);
 
 	mysql_stmt_bind_param(stmt_obj, bind);
 
