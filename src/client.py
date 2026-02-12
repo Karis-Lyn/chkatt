@@ -1,8 +1,5 @@
 import socketio as s
 import asyncio as sco
-from chkatt_index import asc_input
-from chkatt_index import operate_chat
-import os
 import ui 
 
 DNS = "localhost"
@@ -21,23 +18,11 @@ async def connect():
     ui.welcome_info()
     ui.sign_up_info()
 
-@sio.event
-async def resp_msg(data):
-    os.system("clear")
-    print(f"msg: {data}")
-    print("reply: ", end="")
 
 @sio.event
 async def disconnect():
     print(f"client was disconnected")
 # business code
-async def send_msg():
-    while True:
-        print("send: ", end="")
-        msg = await asc_input();
-        if msg.strip():
-            await sio.emit("receive_msg", msg.strip())
-
 
 
 async def main():
