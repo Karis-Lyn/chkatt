@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+chat_bochs.egg-info/PKG-INFO
+chat_bochs.egg-info/SOURCES.txt
+chat_bochs.egg-info/dependency_links.txt
+chat_bochs.egg-info/top_level.txt
+src/__init__.py
+src/client/__init__.py
+src/client/client.py
+src/client/user.py
+src/client/ui/chkatt_index.py
+src/client/ui/ui.py
+src/server/__init__.py
+src/server/server.py
+src/server/handlers/read_conf.py
+src/server/handlers/user_manage.py
