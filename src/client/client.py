@@ -29,10 +29,11 @@ def useradd_req():
     print("hello")
 
 def login_req():
-    pass
+    print(1)
 
 def send_msg_req():
-    pass
+    print(2)
+
 async def main():
     url = f"{PORTOCOL}{DNS}:{PORT}"
     methods = {

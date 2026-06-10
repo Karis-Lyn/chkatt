@@ -1,7 +1,4 @@
-import os
 import asyncio as sco
-from re import A
-import read_conf as config
 
 APP_PROMPT = "chkatt>"
 NO_BR = ""
@@ -24,10 +21,21 @@ async def asc_input(prompt=None, br=None):
 async def operate_chat(methods):
     is_quit = ""
     code = ""
-    method = None
     while is_quit != QUIT:
         code = await asc_input(APP_PROMPT, NO_BR)
+        manager(code, methods)
 
 
-def manager():
-        pass
+
+
+def manager(code, methods):
+    match code:
+        case "1":
+            methods["useradd_req"]()
+        case "2":
+            methods["login_req"]()
+        case "3":
+            methods["send_msg_req"]()
+        case _:
+            pass
+
