@@ -1,14 +1,12 @@
-import socketio as s
 import asyncio as sco
 from src.client.ui import ui
 from src.client.ui import chkatt_index as idx
+from src.public.asclient import client
 
 DNS = "localhost"
 PORT = "3000"
 PORTOCOL = "http://"
 
-# client
-client = s.AsyncClient()
 
 @client.event
 async def connect():

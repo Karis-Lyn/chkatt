@@ -1,9 +1,7 @@
-import socketio as s
 import asyncio as sco
 from aiohttp import web
+from src.public.ascserver import server
 
-
-server = s.AsyncServer(async_mode="aiohttp")
 app = web.Application()
 server.attach(app)
 
