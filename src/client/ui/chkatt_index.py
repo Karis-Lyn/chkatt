@@ -8,6 +8,9 @@ stat = "chkatt"
 SIGN_UP = "1"
 LOGIN_IN = "2"
 SEND_MSG = "3"
+TYPE_USRNAM = "Type your username: "
+TYPE_PASSWD = "Type your password: "
+CHOOSE_USRNAM = "choose a user: "
 
 async def asc_input(prompt=None, br=None):
     if prompt:
@@ -23,19 +26,19 @@ async def operate_chat(methods):
     code = ""
     while is_quit != QUIT:
         code = await asc_input(APP_PROMPT, NO_BR)
-        manager(code, methods)
+        await manager(code, methods)
 
 
 
 
-def manager(code, methods):
+async def manager(code, methods):
     match code:
         case "1":
-            methods["useradd_req"]()
+            await methods["useradd_req"]()
         case "2":
-            methods["login_req"]()
+            await methods["login_req"]()
         case "3":
-            methods["send_msg_req"]()
+            await methods["send_msg_req"]()
         case _:
             pass
 

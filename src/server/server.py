@@ -1,18 +1,10 @@
 import asyncio as sco
 from aiohttp import web
-from src.public.ascserver import server
+from src.server.network.ascserver import server
+
 
 app = web.Application()
 server.attach(app)
-
-
-@server.event
-async def connect(sid, environ):
-    print(f"connection successful: {sid}")
-
-@server.event
-async def disconnect(sid):
-    print("disconnected with client", end="\n")
 
 @server.event
 async def receiver(sid, data):
@@ -20,15 +12,15 @@ async def receiver(sid, data):
 
 @server.event
 def useradd(sid, data):
-    pass
+    print(str(data))
 
 @server.event
 def login(sid, data):
-    pass
+    print(str(data))
 
 @server.event
 def send_msg(sid, data):
-    pass
+    print(str(data))
 
 def main():
     if __name__ == "__main__":

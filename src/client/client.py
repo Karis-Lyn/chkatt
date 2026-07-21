@@ -1,36 +1,30 @@
 import asyncio as sco
-from src.client.ui import ui
 from src.client.ui import chkatt_index as idx
-from src.public.asclient import client
+from src.client.network.asclient import client
 
 DNS = "localhost"
 PORT = "3000"
 PORTOCOL = "http://"
 
-
-@client.event
-async def connect():
-    print("success conncet to server")
-    ui.welcome_info()
-    ui.sign_up_info()
-
 @client.event
 async def responder(data):
     pass
 
-@client.event
-async def disconnect():
-    print(f"client was disconnected")
-
 # --------------------------------------------------
-def useradd_req():
-    print("hello")
+async def useradd_req():
+    usr_data = {}
+    name = await idx.asc_input(idx.TYPE_USRNAM, "")
+    pwd = await idx.asc_input(idx.TYPE_PASSWD, "")
+    usr_data["usr_name"] = name
+    usr_data["pwd"] = pwd
+    await client.emit("useradd", usr_data)
 
-def login_req():
-    print(1)
+async def login_req():
+    name = await idx.asc_input(idx.TYPE_USRNAM, "")
+    pwd = await idx.asc_input(idx.TYPE_PASSWD, "")
 
-def send_msg_req():
-    print(2)
+async def send_msg_req():
+    name = await idx.asc_input(idx.CHOOSE_USRNAM, "")
 
 async def main():
     url = f"{PORTOCOL}{DNS}:{PORT}"
