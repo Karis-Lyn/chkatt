@@ -1,6 +1,6 @@
 import asyncio as sco
 from aiohttp import web
-from src.server.network.ascserver import server
+from src.server.services.index_usr_service import server
 
 
 app = web.Application()
