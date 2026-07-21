@@ -10,17 +10,6 @@ server.attach(app)
 async def receiver(sid, data):
     pass
 
-@server.event
-def useradd(sid, data):
-    print(str(data))
-
-@server.event
-def login(sid, data):
-    print(str(data))
-
-@server.event
-def send_msg(sid, data):
-    print(str(data))
 
 def main():
     if __name__ == "__main__":

@@ -1,5 +1,5 @@
 __pycache__/
 chat_bochs.egg-info/
 build/
-test/
 src/server/c_lib/*.so
+tests/
