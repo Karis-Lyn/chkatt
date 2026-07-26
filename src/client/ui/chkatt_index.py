@@ -1,6 +1,9 @@
 import asyncio as sco
+from re import U
 
-APP_PROMPT = "chkatt>"
+PROMPT_UNAUTH = "chkatt>"
+# karis@dev-team:[cht]$
+promtp_auth = ["karis", "@", "dev-team", ":[", "cht", "]", "$"]
 NO_BR = ""
 QUIT = "\\quit"
 HELP = "\\help"
@@ -23,10 +26,22 @@ async def asc_input(prompt=None, br=None):
 
 async def operate_chat(methods):
     is_quit = ""
-    code = ""
+    DMODE = "chkatt"
+    UMODE = "user"
+    status = UMODE#DMODE
+    cmd = ""
     while is_quit != QUIT:
-        code = await asc_input(APP_PROMPT, NO_BR)
-        await manager(code, methods)
+        cmd = await asc_input(PROMPT_UNAUTH, NO_BR)
+        if cmd == LOGIN_IN: status = UMODE
+        elif cmd == "exit": status = DMODE
+        else: return
+
+        if status == UMODE:
+            cmd = await asc_input("".join(promtp_auth), NO_BR)
+        elif status == DMODE:
+            cmd = await asc_input(PROMPT_UNAUTH, NO_BR)
+
+        await manager(cmd, methods)
 
 
 

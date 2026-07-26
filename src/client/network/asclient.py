@@ -1,3 +1,4 @@
+# index_auth_req
 from socketio import AsyncClient
 from src.client.ui import ui
 
