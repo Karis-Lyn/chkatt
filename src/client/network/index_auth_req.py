@@ -1,5 +1,5 @@
 from src.client.network.asclient import client
-from src.client.ui import chkatt_index as idx
+from src.client.ui import terminal_ui as idx
 
 async def useradd_req():
     usr_data = {}

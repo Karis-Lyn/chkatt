@@ -2,6 +2,7 @@ import asyncio as sco
 from src.client.network.asclient import client
 from src.client.network.index_auth_req import *
 
+
 DNS = "localhost"
 PORT = "3000"
 PORTOCOL = "http://"
