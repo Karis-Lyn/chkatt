@@ -1,5 +1,4 @@
 import asyncio as sco
-from re import U
 
 PROMPT_UNAUTH = "chkatt>"
 # karis@dev-team:[cht]$
@@ -35,16 +34,16 @@ async def operate_chat(methods):
     stat = STAT_UNAUTH
     SPROMT_AU = "".join(PROMPT_AUTH)
     while True:
-        prompt = SPROMT_AU if stat == STAT_UNAUTH else PROMPT_UNAUTH
+        prompt = SPROMT_AU if stat == STAT_AUTH else PROMPT_UNAUTH
 
-        cmd = await asc_input(prompt=prompt)
+        cmd = await asc_input(prompt=prompt, br=NO_BR)
 
         if cmd.lower() == CMD_EXIT: break
 
         new_stat = await manager(cmd, methods, stat)
 
         if new_stat:
-            status = new_stat
+            stat = new_stat
 
 
 
@@ -67,10 +66,9 @@ async def manager(code, methods, status):
 
         if status == STAT_UNAUTH and target["func"] in ["login_req", "useradd_req"]:
             # 这里可以做得更严谨，比如根据 action_func 的返回值判断是否登录成功
-
             print("[*] Operation complete. Switching to authenticated mode...")
-
             return STAT_AUTH
+
     except Exception as e:
         print(f"ERR: [Action failed] {e}")
 
