@@ -1,3 +1,4 @@
+# 
 import asyncio as sco
 from src.client.network.asclient import client
 from src.client.network.index_auth_req import *

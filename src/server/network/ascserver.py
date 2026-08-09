@@ -1,5 +1,8 @@
-from socketio import AsyncServer
+# socketio event such as connect and disconnect in here 
+# initialize server instance
 
+from socketio import AsyncServer
+# expose a server instance to other module
 server = AsyncServer()
 
 @server.event

@@ -1,3 +1,7 @@
+/*
+ * process user data malipulation
+ * for example query a user, insert user data
+ * */
 #include <mysql.h>
 #include <string.h>
 #include <stdint.h>
