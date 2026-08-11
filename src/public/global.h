@@ -1,8 +1,10 @@
+// pulic modules for C program
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
 #define USRA_LEN 16
 #define PWDA_LEN 18
+#include <stdint.h>
 #ifdef _WIN32
 	#include <windows.h>
 	typedef HINSTANCE LibHandle;

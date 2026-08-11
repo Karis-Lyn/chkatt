@@ -1,3 +1,4 @@
+// process everything for bits operate sence
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,3 +1,5 @@
+# Recive whole socketio event and verify arguments
+# pull the services modules
 from src.client.network.asclient import client
 from src.client.ui import terminal_ui as idx
 

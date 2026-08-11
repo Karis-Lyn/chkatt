@@ -1,7 +1,8 @@
+-- all the chkatt project tables are here
 create database if not exists chkatt;
 
 use chkatt;
-
+-- user data table
 create table if not exists usr_info(
 	usr_id bigint unsigned auto_increment primary key not null,
 	usr_name varchar(16) not null unique,
@@ -14,7 +15,8 @@ create table if not exists usr_info(
 	collate utf8_general_ci
   	character set utf8
 	auto_increment = 1000;
-
+-- conversations table, be used for storage your whole conversations
+-- for example your friends and group
 create table if not exists conversations(
 	conv_id bigint unsigned auto_increment primary key not null,
 	conv_type enum('private', 'group') not null,
@@ -23,7 +25,7 @@ create table if not exists conversations(
 	created_at timestamp default current_timestamp,
 	foreign key(created_by) references usr_info(usr_id) on delete set null
 ) engine=InnoDB collate utf8_general_ci character set utf8;
-
+-- record who is in which conversations
 create table if not exists conv_members(
 	conv_id bigint unsigned,
 	usr_id bigint unsigned,
@@ -35,7 +37,8 @@ create table if not exists conv_members(
 	foreign key(conv_id) references conversations(conv_id) on delete cascade,
 	foreign key(usr_id) references usr_info(usr_id) on delete cascade
 ) engine=InnoDB collate utf8_general_ci character set utf8;
-
+-- storage messages, enabling you can login next time 
+-- to restore and recive messages while you offline
 create table if not exists messages(
 	msg_id bigint unsigned auto_increment primary key,
 	conv_id bigint unsigned not null,

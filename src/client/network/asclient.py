@@ -1,3 +1,6 @@
+# chaktt app of client source, process 
+# socketio event such as connect and disconnect in here 
+# initialize server instance
 # index_auth_req
 from socketio import AsyncClient
 from src.client.ui import ui

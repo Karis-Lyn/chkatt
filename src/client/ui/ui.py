@@ -1,4 +1,4 @@
-
+# welcome infomation
 def welcome_info():
     print("Welcome to the chkatt app!")
     print("Type \\quit for exit app or", end="")
