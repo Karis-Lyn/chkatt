@@ -4,7 +4,7 @@
 
 from socketio import AsyncServer
 # expose a server instance to other module
-server = AsyncServer()
+server: AsyncServer = AsyncServer()
 
 @server.event
 async def connect(sid, environ):

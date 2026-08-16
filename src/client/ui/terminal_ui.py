@@ -19,6 +19,8 @@ COMMAND_MAP = {
         "1": {"func": "useradd_req", "desc": "sign up"},
         "2": {"func": "login_req", "desc": "login in"},
         "3": {"func": "send_msg_req", "desc": "send message"},
+        "\\quit": {"func": "bar", "desc": "quit the client"},
+        "\\help": {"func": "bar", "desc": "get help comments"}
 }
 async def asc_input(prompt=None, br=None):
     if prompt:
@@ -39,7 +41,15 @@ async def operate_chat(methods):
 
         cmd = await asc_input(prompt=prompt, br=NO_BR)
 
-        if cmd.lower() == CMD_EXIT: break
+        if cmd == QUIT:
+            break
+
+        if cmd.lower() == CMD_EXIT:
+            if stat == STAT_AUTH:
+                print("Logged out.")
+                stat = STAT_UNAUTH
+                continue
+            break
 
         new_stat = await manager(cmd, methods, stat)
 
@@ -64,8 +74,8 @@ async def manager(code, methods, status):
 
     try:
         await action_fn()
-
-        if status == STAT_UNAUTH and target["func"] in ["login_req", "useradd_req"]:
+        #"useradd_req"
+        if status == STAT_UNAUTH and target["func"] in ["login_req"]:
             # 这里可以做得更严谨，比如根据 action_func 的返回值判断是否登录成功
             print("[*] Operation complete. Switching to authenticated mode...")
             return STAT_AUTH

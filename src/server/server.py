@@ -9,6 +9,7 @@ from aiohttp import web
 from src.server.handlers.user_manage import server
 
 
+
 app = web.Application()
 server.attach(app)
 

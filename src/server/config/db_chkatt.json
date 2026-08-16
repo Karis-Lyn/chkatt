@@ -1,3 +1,7 @@
 {
-	"_comment": "chaktt configure data"
+	"host": "localhost",
+	"user": "root",
+	"pwd": "bh@mariaDB1748",
+	"database": "chkatt",
+	"port": 3306
 }

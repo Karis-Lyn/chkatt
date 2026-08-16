@@ -23,7 +23,7 @@ async def main():
     try:
         await client.connect(url)
         await idx.operate_chat(methods)
-        await client.wait()
+        await client.disconnect()
         
     except KeyboardInterrupt:
         print("bye~~~")

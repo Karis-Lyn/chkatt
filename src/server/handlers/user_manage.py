@@ -5,6 +5,7 @@ from src.server.services.usersl_services import *
 
 @server.event
 def useradd(sid, data):
+    register_user()
     print(str(data))
 
 @server.event
