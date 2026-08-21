@@ -3,6 +3,7 @@ libs = files(
   'user.c'
 )
 mysql_dep = dependency('mariadb', 'mysqlclient', required: true)
+openssl_dep = dependency('openssl', required: true)
 inc = include_directories('../../public')
 foreach src : libs
   full_path = src.full_path()
@@ -13,7 +14,7 @@ foreach src : libs
     file_name,
     install: true,
     install_dir: 'c_lib',
-    dependencies: mysql_dep,
+    dependencies: [mysql_dep, openssl_dep],
     include_directories: inc
   )
 endforeach

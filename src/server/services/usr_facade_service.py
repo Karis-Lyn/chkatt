@@ -32,5 +32,5 @@ def bind_cfunction(db, fn_name, arg_types=None, ret_types: Any=c_void_p):
     if arg_types is not None:
         func.argtypes = arg_types
 
-        func.retypes = ret_types
+        func.restype = ret_types
     return func

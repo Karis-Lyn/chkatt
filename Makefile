@@ -1,4 +1,4 @@
-.PHONY : clean all
+.PHONY : clean all build
 #vpath %.py src/client
 #vpath %.py src/server
 #vpath %.py src/client/ui

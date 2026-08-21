@@ -87,7 +87,7 @@ bool run_mysql(
 
 	g_db_handle = mysql_init(NULL);
 
-	mysql_real_connect(
+	if (!mysql_real_connect(
 			g_db_handle,
 			host,
 			user,
@@ -95,9 +95,7 @@ bool run_mysql(
 			db,
 			port,
 			NULL,
-			0);
-
-	if (g_db_handle == NULL) {
+			0)) {
 		fprintf(stderr, "connectting database failed\n");
 		return 0;
 	}
