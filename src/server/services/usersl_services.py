@@ -21,20 +21,20 @@ def register_user(data):
     # define unsigned char
     #uchar_32 = c_ubyte * SALT_LEN
     # psalt = uchar_32()
-    salt_buf = create_string_buffer(SALT_LEN + 1)
-    hash_buf = (c_ubyte * (SALT_LEN + 1))()
+    salt_buf = create_string_buffer(SALT_LEN)
+    hash_buf = (c_ubyte * (SALT_LEN))()
 
     gen_salt = bind_cfunction(user, "gen_salt", \
             [c_char_p], c_bool)
 
     pwd_hash = bind_cfunction(user, \
-            "pwd_hash", 
+            "pwd_hash",
           [c_char_p, c_char_p, POINTER(c_ubyte)],
             c_bool)
 
-    verify_pwd = bind_cfunction(user, 
+    verify_pwd = bind_cfunction(user,
              "verify_pwd",
-            [c_char_p, c_char_p, c_char_p, POINTER(c_ubyte)],
+            [c_char_p, c_char_p, POINTER(c_ubyte)],
             c_bool)
 
     db = read_pfile(CONFIGURE_FILE, CONFIG_MOD_PAH)
@@ -52,13 +52,14 @@ def register_user(data):
         pwd = "1234567".encode("utf-8")
 
 
-        if (pwd_hash(pwd, salt, hash_buf)): 
+        if (pwd_hash(pwd, salt, hash_buf)):
             hash_hex = bytes(hash_buf).hex()
-            salt = bytes(salt).hex()
             print(f"salt: {salt}")
             print(f"hash: {hash_hex}")
         # user_add()
+        # create a new unsigned char* with copy origin value for target varible
+        stored_raw = (c_ubyte * 32).from_buffer_copy(bytes.fromhex(hash_hex))
+        if (verify_pwd(pwd, salt, stored_raw) == 1): print(1)
     else:
         print("Error: [not found].")
     #run_mysql()
-
