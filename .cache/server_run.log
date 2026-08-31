@@ -1,11 +1,12 @@
 The server start to 3000
 ======== Running on http://0.0.0.0:3000 ========
 (Press CTRL+C to quit)
-connection successfull: b0sLBSGnHSlFx3OWAAAB
-salt: 6539343937656434643338306237336263333362303163353262363837303061
-hash: ae47bb5ceb746e89da4363f64df5c2753bf7be307e40b26aea16317ed822aabb
-1
+connection successfull: 8e1cFC2qPQAHIqQhAAAB
+salt: b'eae33ac5cef1a25f192a0c845d51ed15'
+hash: cc9db2cf069f5c07f4b81063a2116e6a793bce32001120050ef1593673f2ad8e
+connectting database failed
+Error: [Failed connect mariadb table].
 {'usr_name': 'testuser', 'pwd': 'test123'}
 disconnected with client
-connection successfull: E8QGj-9fmVq_A4bTAAAD
+connection successfull: 2zvqASf49m9GLX1WAAAD
 disconnected with client

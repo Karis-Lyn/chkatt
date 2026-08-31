@@ -32,6 +32,9 @@ def register_user(data):
           [c_char_p, c_char_p, POINTER(c_ubyte)],
             c_bool)
 
+    user_add = bind_cfunction(dbctrl, "user_add", \
+            [c_char_p, c_char_p, c_char_p], c_bool)
+
     verify_pwd = bind_cfunction(user,
              "verify_pwd",
             [c_char_p, c_char_p, POINTER(c_ubyte)],
@@ -44,22 +47,29 @@ def register_user(data):
         pwd = db["pwd"].encode("utf-8")
         database = db["database"].encode("utf-8")
         port = db["port"]
-        is_success = run_mysql(host, user, pwd, database, port)
+        is_success = run_mysql(host, user, pwd, database, port) # ***
         #Client* user_add(char* nam, char* pwd_key, char* salt)
         # salt = cast(salt_buf, c_char_p)
         gen_salt(salt_buf)
         salt = salt_buf.value
-        pwd = "1234567".encode("utf-8")
+        name = data["usr_name"].encode("utf-8")
+        usr_pwd  = data["pwd"].encode("utf-8")
+        hash_hex = ""
+        # pwd_demo = "1234567".encode("utf-8")
 
 
-        if (pwd_hash(pwd, salt, hash_buf)):
-            hash_hex = bytes(hash_buf).hex()
+        if pwd_hash(usr_pwd, salt, hash_buf):
+            hash_hex = bytes(hash_buf).hex().encode("utf-8")
             print(f"salt: {salt}")
             print(f"hash: {hash_hex}")
+        else:
+            print("Error: [not found].")
         # user_add()
         # create a new unsigned char* with copy origin value for target varible
-        stored_raw = (c_ubyte * 32).from_buffer_copy(bytes.fromhex(hash_hex))
-        if (verify_pwd(pwd, salt, stored_raw) == 1): print(1)
+        # if (verify_pwd(pwd_demo, salt, stored_raw) == 1): print(1)
+        
+        user_add(name, hash_hex, salt)
+        # stored_raw = (c_ubyte * 32).from_buffer_copy(bytes.fromhex(hash_hex))
+        # verify_pwd(pwd_demo, salt, stored_raw)
     else:
         print("Error: [not found].")
-    #run_mysql()

@@ -26,8 +26,8 @@ bool check_acount() {
 }
 
 
-Client* user_add(char* nam, char* pwd_key, char* salt) {
-	Client* client = (Client*) malloc(sizeof(Client));
+bool user_add(char* nam, char* pwd_hash, char* salt) {
+	//Client* client = (Client*) malloc(sizeof(Client));
 	MYSQL_BIND bind[3];
 	MYSQL_STMT* stmt_obj;
 	const char* stmt_errors;
@@ -43,9 +43,9 @@ Client* user_add(char* nam, char* pwd_key, char* salt) {
 	bind[0].buffer_type = MYSQL_TYPE_STRING;
 	bind[0].buffer_length = strlen(nam);
 
-	bind[1].buffer = pwd_key;
+	bind[1].buffer = pwd_hash;
 	bind[1].buffer_type = MYSQL_TYPE_STRING;
-	bind[1].buffer_length = strlen(pwd_key);
+	bind[1].buffer_length = strlen(pwd_hash);
 
 	bind[2].buffer = salt;
 	bind[2].buffer_type = MYSQL_TYPE_STRING;
@@ -58,6 +58,7 @@ Client* user_add(char* nam, char* pwd_key, char* salt) {
 		fprintf(stderr, "add is acount failed [%s]\n", stmt_errors);
 		mysql_stmt_close(stmt_obj);
 		stmt_obj = NULL;
+		return 0;
 	}
 	
 	//memcpy(, const void *restrict src, size_t n)
@@ -65,7 +66,8 @@ Client* user_add(char* nam, char* pwd_key, char* salt) {
 	mysql_stmt_close(stmt_obj);
 	stmt_obj = NULL;
 	
-	return client;
+	//return client;
+	return 1;
 }
 
 bool destory_mysql() {

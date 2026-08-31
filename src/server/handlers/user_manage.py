@@ -5,6 +5,7 @@ from src.server.services.usersl_services import *
 
 @server.event
 def useradd(sid, data):
+    if not data: return
     register_user(data)
     print(str(data))
 
