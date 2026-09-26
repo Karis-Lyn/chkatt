@@ -21,10 +21,6 @@ bool drop_acount() {
   	return 1;
 }
 
-bool check_acount() {
-	return 1;
-}
-
 
 bool user_add(char* nam, char* pwd_hash, char* salt) {
 	//Client* client = (Client*) malloc(sizeof(Client));

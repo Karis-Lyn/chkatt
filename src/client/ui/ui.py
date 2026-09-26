@@ -9,4 +9,5 @@ def sign_up_info():
     print("2. Login In")
     print("3. Send Msg To Who")
 
-
+def render_prompt():
+    print("chkatt>", end="", flush=True)

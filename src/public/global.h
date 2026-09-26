@@ -1,4 +1,5 @@
 // pulic modules for C program
+#include <regex.h>
 #ifndef GLOBAL_H
 #define GLOBAL_H
 

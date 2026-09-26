@@ -1,5 +1,7 @@
 # process about ui render of cli in client
 import asyncio as sco
+from sys import stdout
+
 
 PROMPT_UNAUTH = "chkatt>"
 # karis@dev-team:[cht]$
@@ -23,13 +25,17 @@ COMMAND_MAP = {
         "\\help": {"func": "bar", "desc": "get help comments"}
 }
 async def asc_input(prompt=None, br=None):
-    if prompt:
-        if br is not None:
-            print(prompt, end=br)
-        else:
-            print(prompt)
-    return await sco.get_event_loop().run_in_executor(
-            None, input)
+
+    loop = sco.get_running_loop()
+
+    try:
+        return await loop.run_in_executor(
+                None,
+                lambda: input(prompt))
+    # sco.CancelledError
+    except (EOFError, KeyboardInterrupt):
+        print("\n")
+        return ""
 
 async def operate_chat(methods):
     cmd = ""

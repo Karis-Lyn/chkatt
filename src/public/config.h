@@ -1,0 +1,43 @@
+/* Minimal config.h for PCRE2 10.47 on Linux x86_64 */
+
+#define HAVE_CONFIG_H 1
+#define HAVE_STDINT_H 1
+#define HAVE_STDLIB_H 1
+#define HAVE_STRING_H 1
+#define HAVE_STRINGS_H 1
+#define HAVE_SYS_TYPES_H 1
+#define HAVE_UNISTD_H 1
+#define HAVE_INTTYPES_H 1
+#define HAVE_LIMITS_H 1
+#define HAVE_STDIO_H 1
+#define HAVE_WCHAR_H 1
+#define SUPPORT_PCRE2_8 1
+#define SUPPORT_PCRE2_16 1
+#define SUPPORT_PCRE2_32 1
+#define SUPPORT_UNICODE 1
+#define SUPPORT_JIT 1
+#define HEAP_LIMIT 0
+#define MATCH_LIMIT 10000000
+#define MATCH_LIMIT_DEPTH MATCH_LIMIT
+#define LINK_SIZE 2
+#define MAX_NAME_COUNT 10000
+#define MAX_NAME_SIZE 256
+#define MAX_VARLOOKBEHIND 255
+#define NEWLINE_DEFAULT 2
+#define PARENS_NEST_LIMIT 250
+#define PCRE2GREP_BUFSIZE 20480
+#define PCRE2GREP_MAX_BUFSIZE 1048576
+#define PCRE2_EXPORT
+#define PCRE2_EXP_DEFN
+#define VERSION "10.47"
+#define PACKAGE "pcre2"
+#define PACKAGE_NAME "PCRE2"
+#define PACKAGE_STRING "PCRE2 10.47"
+#define PACKAGE_TARNAME "pcre2"
+#define PACKAGE_VERSION "10.47"
+#define PACKAGE_BUGREPORT "pcre-dev@exim.org"
+#define PACKAGE_URL "https://www.pcre.org/"
+#define PCRE2_MAJOR 10
+#define PCRE2_MINOR 47
+#define PCRE2_PRERELEASE
+#define PCRE2_DATE 2024-05-01
