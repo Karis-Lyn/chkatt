@@ -13,6 +13,7 @@ CONFIG_MOD_PAH = "config"
 USER_LEN = 16
 SALT_LEN = 32
 PWD_LEN = 8
+ERROR = 1
 
 # future change
 def connect_to_mysql(config_data):
@@ -49,15 +50,17 @@ def is_valid_user_name(name):
         print("[User Err: You didn't type any character]")
         return None
     # transform to C api
+    print(1)
     c_callback = OUTPUT_CALLBACK(user_err_output)
     # verify 
-    api.libuser.recheck_usr_data(
+    if api.libuser.recheck_usr_data(
             name,
             reg_check_name.encode("utf-8"),
-            c_callback)
+            c_callback) == ERROR: return None
     return name
 
 def is_valid_pwd(pwd):
+    ERROR = 1
     api = load_api()
     pwd = pwd.strip()
     reg_check_pwd = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@~#$%^&*-_]).*"
@@ -72,10 +75,10 @@ def is_valid_pwd(pwd):
         return None
     c_callback = OUTPUT_CALLBACK(pwd_err_output) # transform to C api
     # verify 
-    api.libuser.recheck_usr_data(
+    if api.libuser.recheck_usr_data(
             pwd,
             reg_check_pwd.encode("utf-8"),
-            c_callback)
+            c_callback) == ERROR: return None
     return pwd
 
 
@@ -98,11 +101,14 @@ def register_user(data):
 
     name = data["usr_name"].encode("utf-8")
     valid_name = is_valid_user_name(name)
-    if not valid_name: return 0
+    if not valid_name: 
+        return 0
 
     usr_pwd  = data["pwd"].encode("utf-8")
     valid_pwd = is_valid_pwd(usr_pwd)
-    if not valid_pwd: return 0
+    if not valid_pwd: 
+        print("erro")
+        return 0
 
     hash_hex = ""
     # pwd_demo = "1234567".encode("utf-8")
@@ -116,7 +122,7 @@ def register_user(data):
     # create a new unsigned char* with copy origin value for target varible
     # if (api.libuser.verify_pwd(pwd_demo, salt, stored_raw) == 1): print(1)
     
-    # api.libdbctrl.user_add(valid_name, hash_hex, salt)
+    api.libdbctrl.user_add(valid_name, hash_hex, salt)
     # stored_raw = (c_ubyte * 32).from_buffer_copy(bytes.fromhex(hash_hex))
     # api.libuser.verify_pwd(pwd_demo, salt, stored_raw)
 

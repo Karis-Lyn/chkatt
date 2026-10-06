@@ -1,5 +1,6 @@
 # process about ui render of cli in client
 import asyncio as sco
+from getpass import getpass
 from sys import stdout
 
 
@@ -24,15 +25,19 @@ COMMAND_MAP = {
         "\\quit": {"func": "bar", "desc": "quit the client"},
         "\\help": {"func": "bar", "desc": "get help comments"}
 }
-async def asc_input(prompt=None, br=None):
+async def asc_input(prompt:str="", hide=False):
 
     loop = sco.get_running_loop()
+    if hide:
+        input_func = lambda: getpass(prompt)
+    else:
+        input_func = lambda: input(prompt)
 
     try:
         return await loop.run_in_executor(
-                None,
-                lambda: input(prompt))
-    # sco.CancelledError
+                    None,
+                    input_func)
+        # sco.CancelledError
     except (EOFError, KeyboardInterrupt):
         print("\n")
         return ""
@@ -45,7 +50,7 @@ async def operate_chat(methods):
     while True:
         prompt = SPROMT_AU if stat == STAT_AUTH else PROMPT_UNAUTH
 
-        cmd = await asc_input(prompt=prompt, br=NO_BR)
+        cmd = await asc_input(prompt=prompt)
 
         if cmd == QUIT:
             break

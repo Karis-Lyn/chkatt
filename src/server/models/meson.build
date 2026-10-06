@@ -7,7 +7,7 @@ c_lib_dir = meson.current_source_dir() / '..' / 'c_lib'
 inc = include_directories('../../public')
 message('wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrry: ', c_lib_dir)
 
-mysql_dep = dependency('mariadb', 'mysqlclient', required: true)
+mysql_dep = dependency('mariadb', required: true)
 openssl_dep = dependency('openssl', required: true)
 pcre2_dep = declare_dependency(
   link_args: ['-L' + c_lib_dir, '-lpcre2-8'],
